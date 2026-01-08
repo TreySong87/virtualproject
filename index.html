@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrated Virtual Project Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: 'Noto Sans KR', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Scrollbar Styling */
+        body::-webkit-scrollbar {
+            width: 10px;
+        }
+        body::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        body::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 5px;
+        }
+
+        /* Narrative Section Specific Styles (Light Theme Preserved) */
+        .narrative-content {
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .narrative-header { color: #1a2b42; }
+        .narrative-body { color: #343a40; }
+        .narrative-accent-border { border-color: #3d6cb9; }
+        .narrative-bg-accent { background-color: #3d6cb9; }
+        .narrative-text-accent { color: #3d6cb9; }
+        
+        /* Iframe Containers */
+        .iframe-section {
+            width: 100%;
+            height: 100vh; /* Full viewport height for deck/portfolio */
+            border-bottom: 1px solid #374151;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Video Card Hover Effect */
+        .video-card:hover .play-icon {
+            transform: scale(1.1);
+            color: #ef4444; /* Red color on hover */
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen overflow-hidden">
+
+    <!-- Header & Navigation (Fixed) -->
+    <header class="flex-none h-[60px] bg-gray-900 border-b border-gray-700 flex items-center justify-between px-4 z-50 shadow-md">
+        <h1 class="text-lg font-bold text-gray-100 hidden md:block">Virtual Project Integration</h1>
+        
+        <!-- Navigation -->
+        <nav class="flex space-x-2 overflow-x-auto scrollbar-hide w-full md:w-auto">
+            <button onclick="scrollToSection('deck')" id="btn-deck" class="px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-800 transition-colors focus:outline-none">
+                Virtual Deck
+            </button>
+            <button onclick="scrollToSection('narrative')" id="btn-narrative" class="px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-800 transition-colors focus:outline-none">
+                Virtual Narrative
+            </button>
+            <button onclick="scrollToSection('portfolio')" id="btn-portfolio" class="px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-800 transition-colors focus:outline-none">
+                Virtual Portfolio
+            </button>
+            <button onclick="scrollToSection('reference')" id="btn-reference" class="px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-800 transition-colors focus:outline-none">
+                Reference
+            </button>
+        </nav>
+        
+        <div class="hidden md:block w-32">
+            <!-- Spacer -->
+        </div>
+    </header>
+
+    <!-- Main Content Area (Scrollable) -->
+    <main id="main-scroll-container" class="flex-grow bg-gray-800 relative overflow-y-auto">
+        
+        <!-- Section 1: Virtual Deck (Iframe) -->
+        <section id="section-deck" class="iframe-section">
+            <iframe src="https://garimto81.github.io/virtual_deck/" title="Virtual Deck" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </section>
+
+        <!-- Section 2: Virtual Narrative (Inline HTML Content) -->
+        <section id="section-narrative" class="w-full min-h-screen narrative-content relative">
+            <div class="max-w-5xl mx-auto p-6 sm:p-12">
+                <!-- Header -->
+                <div class="mb-12 text-center">
+                    <h2 class="text-4xl font-bold narrative-header mb-2">프로덕션 재설계</h2>
+                    <p class="text-lg text-gray-500">서사 중심 멀티 테이블 모델</p>
+                </div>
+
+                <!-- 1. Vision Section -->
+                <div class="mb-16">
+                    <h3 class="text-3xl font-bold narrative-header mb-6 border-b-2 narrative-accent-border pb-2">핵심 비전: 플레이가 곧 캐릭터다</h3>
+                    <div class="space-y-4 narrative-body text-lg leading-relaxed">
+                        <p>기존 포커 방송의 한계는 명확합니다. 수백 명의 참가자 중 단 하나의 '피처 테이블'에 모든 자원을 집중함으로써, 대회장 전체를 아우르는 거대한 서사를 놓치고 있습니다. 시청자는 선수의 과거 이력이나 인터뷰가 아닌, 테이블 위에서 펼쳐지는 '플레이'를 통해 감정적으로 연결됩니다.</p>
+                        <p>우리의 새로운 비전은 이 근본적인 진실에서 출발합니다. 프로덕션의 목표는 더 이상 특정 테이블을 수동적으로 중계하는 것이 아닙니다. 대회 전체를 하나의 거대한 무대로 보고, 가장 빛나는 플레이를 펼치는 선수를 발굴하여 그를 주인공으로 만드는 '실시간 스토리텔링 엔진'이 되는 것입니다.</p>
+                    </div>
+                </div>
+
+                <!-- 2. Model Section -->
+                <div class="mb-16">
+                    <h3 class="text-3xl font-bold narrative-header mb-6 border-b-2 narrative-accent-border pb-2">프로덕션 모델: Drive to Survive x NFL RedZone</h3>
+                    <div class="space-y-4 narrative-body mb-8">
+                        <p class="text-lg">이 새로운 비전을 실현하기 위해, F1 다큐멘터리 <span class="font-bold narrative-text-accent">'Drive to Survive'</span>의 서사 구축 방식과 NFL <span class="font-bold narrative-text-accent">'RedZone'</span>의 역동적 중계 방식을 결합했습니다.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                            <h4 class="text-xl font-bold narrative-header mb-3"><i class="fas fa-user-check narrative-text-accent mr-2"></i> 키 플레이어 시스템</h4>
+                            <p class="narrative-body">방송은 더 이상 무작위로 주인공이 탄생하길 기다리지 않습니다. 서사적 잠재력을 가진 소수의 '키 플레이어' 그룹을 선정하여 집중 추적하며 초기 서사의 뼈대를 구축합니다.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                            <h4 class="text-xl font-bold narrative-header mb-3"><i class="fas fa-random narrative-text-accent mr-2"></i> 역동적 라이브 연출</h4>
+                            <p class="narrative-body">대회장 전체에서 발생하는 빅 팟, 극적인 올인 등 모든 의미 있는 액션을 실시간으로 감지하고 즉시 화면을 전환하여 긴장감을 유지합니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- Diagram Visualization -->
+                    <div class="bg-white p-8 rounded-lg shadow-md border border-gray-200">
+                        <h4 class="text-xl font-bold narrative-header mb-8 text-center">새로운 서사 구조</h4>
+                        <div class="flex flex-col items-center">
+                            <div class="text-center">
+                                <div class="narrative-bg-accent text-white font-bold py-3 px-6 rounded-lg shadow-lg inline-block">피처 테이블 (Feature Table)</div>
+                                <p class="text-sm text-gray-600 mt-1">▲ 주인공들의 클라이맥스 무대</p>
+                            </div>
+                            <div class="w-px h-8 bg-gray-300"></div>
+                            <div class="text-center">
+                                <div class="bg-blue-100 border-2 border-dashed border-blue-400 text-blue-800 font-bold py-3 px-6 rounded-lg shadow-md inline-block">플렉스 멀티 테이블 (Flex Multi-Table)</div>
+                                <p class="text-sm text-gray-600 mt-1">주인공을 발굴하고 육성하는 인큐베이터</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Workflow Section (Modified: Vertical List) -->
+                <div class="mb-16">
+                    <h3 class="text-3xl font-bold narrative-header mb-6 border-b-2 narrative-accent-border pb-2">실행 워크플로우: 실시간 스토리텔링</h3>
+                    
+                    <div class="space-y-6">
+                        <!-- Step 1 -->
+                        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 narrative-accent-border">
+                            <h4 class="font-bold text-xl mb-3 narrative-header flex items-center">
+                                <span class="bg-gray-200 text-gray-700 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">1</span>
+                                프리 프로덕션 (대회 시작 전)
+                            </h4>
+                            <ul class="list-disc list-inside space-y-2 narrative-body ml-2">
+                                <li><strong>키 플레이어 선정:</strong> 실력, 인지도, 잠재적 스토리를 고려하여 5~7명의 주인공 후보 선정.</li>
+                                <li><strong>데이터베이스 구축:</strong> 선수 프로필 및 플레이 스타일 DB화.</li>
+                                <li><strong>기술 점검:</strong> 멀티 테이블 카메라 및 데이터 로거 시스템 최종 점검.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 narrative-accent-border">
+                            <h4 class="font-bold text-xl mb-3 narrative-header flex items-center">
+                                <span class="bg-gray-200 text-gray-700 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">2</span>
+                                라이브 프로덕션 (핸드 진행 중)
+                            </h4>
+                            <ul class="list-disc list-inside space-y-2 narrative-body ml-2">
+                                <li><strong>실시간 모니터링:</strong> 방송 허브에서 모든 테이블 데이터 감시 (키 플레이어 액션, 빅 팟 등).</li>
+                                <li><strong>서사적 가치 판단 (Triage):</strong> 발생한 액션이 우리 이야기에 기여하는지 즉시 판단 (1순위: 키 플레이어, 2순위: 빅 팟).</li>
+                                <li><strong>방송 송출 결정:</strong> 의미 없는 핸드(폴드 등) 시간 동안 다른 테이블의 흥미로운 상황으로 화면 전환.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 narrative-accent-border">
+                            <h4 class="font-bold text-xl mb-3 narrative-header flex items-center">
+                                <span class="bg-gray-200 text-gray-700 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">3</span>
+                                포스트 핸드 (핸드 종료 후)
+                            </h4>
+                            <ul class="list-disc list-inside space-y-2 narrative-body ml-2">
+                                <li><strong>리플레이 및 분석:</strong> GFX와 데이터를 활용해 방금 나온 플레이의 심층 분석 제공.</li>
+                                <li><strong>서사 업데이트:</strong> 해당 핸드로 인한 칩 스택 변화와 '이야기' 속 위치 변화 해설.</li>
+                                <li><strong>주인공 교체/승격:</strong> 새로운 스타가 탄생하면 키 플레이어로 격상하고 피처 테이블 이동 고려.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Virtual Portfolio (Iframe) -->
+        <section id="section-portfolio" class="iframe-section">
+            <iframe src="https://garimto81.github.io/virtual_portfolio/" title="Virtual Portfolio" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </section>
+
+        <!-- Section 4: Reference Videos -->
+        <section id="section-reference" class="w-full min-h-screen bg-gray-900 relative p-8">
+            <div class="max-w-6xl mx-auto mt-12">
+                <h2 class="text-3xl font-bold text-gray-100 mb-8 border-b border-gray-700 pb-4">Reference Videos</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Video Card 1 -->
+                    <!-- 4117 seconds = 1h 08m 37s -->
+                    <div class="video-card bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer transition-transform hover:-translate-y-1" onclick="openVideoModal('HOe2uUDtyJc', 4117)">
+                        <div class="relative w-full h-48 bg-gray-700 flex items-center justify-center group">
+                            <img src="https://img.youtube.com/vi/HOe2uUDtyJc/hqdefault.jpg" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity" alt="Thumbnail">
+                            <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                            <i class="play-icon fas fa-play-circle text-6xl text-white opacity-80 transition-all duration-300 z-10"></i>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-200">$5M GTD | WSOP Super Circuit Cyprus Main Event - Day 1A</h3>
+                            <p class="text-sm text-gray-400 mt-2">Start: 1h 08m 37s (Click to Play)</p>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 2 -->
+                    <!-- 27807 seconds = 7h 43m 27s -->
+                    <div class="video-card bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer transition-transform hover:-translate-y-1" onclick="openVideoModal('HOe2uUDtyJc', 27807)">
+                        <div class="relative w-full h-48 bg-gray-700 flex items-center justify-center group">
+                            <img src="https://img.youtube.com/vi/HOe2uUDtyJc/hqdefault.jpg" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity" alt="Thumbnail">
+                            <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                            <i class="play-icon fas fa-play-circle text-6xl text-white opacity-80 transition-all duration-300 z-10"></i>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-200">$5M GTD | WSOP Super Circuit Cyprus Main Event - Day 1A (Late Stage)</h3>
+                            <p class="text-sm text-gray-400 mt-2">Start: 7h 43m 27s (Click to Play)</p>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 3: Added per user request -->
+                    <!-- 8549 seconds = 2h 22m 29s -->
+                    <div class="video-card bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer transition-transform hover:-translate-y-1" onclick="openVideoModal('A5SCuiUP13w', 8549)">
+                        <div class="relative w-full h-48 bg-gray-700 flex items-center justify-center group">
+                            <img src="https://img.youtube.com/vi/A5SCuiUP13w/hqdefault.jpg" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity" alt="Thumbnail">
+                            <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                            <i class="play-icon fas fa-play-circle text-6xl text-white opacity-80 transition-all duration-300 z-10"></i>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-200">FINAL TABLE | WSOP Super Circuit Cyprus Main Event</h3>
+                            <p class="text-sm text-gray-400 mt-2">Start: 2h 22m 29s (Click to Play)</p>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 4: Added per user request -->
+                    <!-- 22790 seconds = 6h 19m 50s -->
+                    <div class="video-card bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer transition-transform hover:-translate-y-1" onclick="openVideoModal('A5SCuiUP13w', 22790)">
+                        <div class="relative w-full h-48 bg-gray-700 flex items-center justify-center group">
+                            <img src="https://img.youtube.com/vi/A5SCuiUP13w/hqdefault.jpg" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity" alt="Thumbnail">
+                            <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                            <i class="play-icon fas fa-play-circle text-6xl text-white opacity-80 transition-all duration-300 z-10"></i>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-200">FINAL TABLE | WSOP Super Circuit Cyprus Main Event (Late Stage)</h3>
+                            <p class="text-sm text-gray-400 mt-2">Start: 6h 19m 50s (Click to Play)</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- YouTube Modal (Hidden by default) -->
+    <div id="video-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-90 hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="closeVideoModal()">
+        <div class="relative w-full max-w-5xl aspect-video bg-black rounded-lg shadow-2xl overflow-hidden" onclick="event.stopPropagation()">
+            <button onclick="closeVideoModal()" class="absolute top-4 right-4 text-white hover:text-red-500 z-10 transition-colors">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <iframe id="youtube-player" class="w-full h-full" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        const mainContainer = document.getElementById('main-scroll-container');
+        const videoModal = document.getElementById('video-modal');
+        const youtubePlayer = document.getElementById('youtube-player');
+
+        // Video Modal Logic
+        function openVideoModal(videoId, startTime) {
+            if (!videoId || videoId === 'VIDEO_ID_HERE') {
+                if(videoId === 'VIDEO_ID_HERE') alert("아직 영상 링크가 설정되지 않았습니다.");
+                return;
+            }
+
+            // Updated src: Added 'mute=1' to fix autoplay issues on modern browsers
+            // Added 'playsinline=1' for better mobile compatibility
+            let src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&playsinline=1`;
+            if (startTime) {
+                src += `&start=${startTime}`;
+            }
+            
+            youtubePlayer.src = src;
+            videoModal.classList.remove('hidden');
+        }
+
+        function closeVideoModal() {
+            videoModal.classList.add('hidden');
+            // Reset source to stop video
+            youtubePlayer.src = "";
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape" && !videoModal.classList.contains('hidden')) {
+                closeVideoModal();
+            }
+        });
+
+
+        // Scroll to specific section
+        function scrollToSection(sectionName) {
+            const section = document.getElementById('section-' + sectionName);
+            if (section) {
+                const sectionTop = section.offsetTop;
+                mainContainer.scrollTo({
+                    top: sectionTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Highlight active nav button based on scroll position
+        function updateActiveButton() {
+            const sections = ['deck', 'narrative', 'portfolio', 'reference'];
+            let currentSection = '';
+
+            const containerTop = mainContainer.scrollTop;
+            const containerHeight = mainContainer.clientHeight;
+            const scrollMiddle = containerTop + (containerHeight / 3);
+
+            for (const sectionName of sections) {
+                const element = document.getElementById('section-' + sectionName);
+                if (element) {
+                    const elTop = element.offsetTop;
+                    const elBottom = elTop + element.offsetHeight;
+                    
+                    if (scrollMiddle >= elTop && scrollMiddle < elBottom) {
+                        currentSection = sectionName;
+                        break;
+                    }
+                }
+            }
+
+            if (currentSection) {
+                sections.forEach(name => {
+                    const btn = document.getElementById('btn-' + name);
+                    if (name === currentSection) {
+                        btn.classList.remove('text-gray-400', 'hover:bg-gray-800');
+                        btn.classList.add('text-white', 'bg-gray-700', 'shadow-sm');
+                    } else {
+                        btn.classList.add('text-gray-400', 'hover:bg-gray-800');
+                        btn.classList.remove('text-white', 'bg-gray-700', 'shadow-sm');
+                    }
+                });
+            }
+        }
+
+        let isScrolling = false;
+        mainContainer.addEventListener('scroll', () => {
+            if (!isScrolling) {
+                window.requestAnimationFrame(() => {
+                    updateActiveButton();
+                    isScrolling = false;
+                });
+                isScrolling = true;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateActiveButton();
+        });
+    </script>
+</body>
+</html>
